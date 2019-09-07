@@ -1,3 +1,12 @@
+// const express = require('express')
+// const app = express()
+// const port = process.env.PORT || 5000
+
+// app.get('/', (req, res) => res.send('Hello World!'))
+
+// app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+
 import express from 'express';
 var app = express();
 import fs from 'fs';
@@ -21,13 +30,15 @@ export default class CallHandler {
 
     init() {
 
-        var ws_server_port = (process.env.PORT || 4442);
-        this.server = http.createServer(app).listen(ws_server_port, () => {
-            console.log("Start WS Server: bind => ws://0.0.0.0:"+ws_server_port);
-        });
+        // const port = Number(process.env.PORT);
 
-        this.ws = new ws.Server({ server: this.server });
-        this.ws.on('connection', this.onConnection);
+        // var ws_server_port = (port || 4442);
+        // this.server = http.createServer(app).listen(ws_server_port, () => {
+        //     console.log("Start WS Server: bind => ws://0.0.0.0:"+ws_server_port);
+        // });
+
+        // this.ws = new ws.Server({ server: this.server });
+        // this.ws.on('connection', this.onConnection);
 
 
         var options = {
@@ -35,12 +46,16 @@ export default class CallHandler {
             cert: fs.readFileSync('certs/cert.pem')
         };
 
-        var wss_server_port = (process.env.PORT + 1 || 4443);
+        console.log('port---', port)
+
+        var wss_server_port = (port + 1 || 4443);
+
         this.ssl_server = https.createServer(options, app).listen(wss_server_port, () => {
             console.log("Start WSS Server: bind => wss://0.0.0.0:"+wss_server_port);
         });
 
-        this.wss = new ws.Server({ server: this.ssl_server });
+
+        this.wss = new ws.Server({ port: wss_server_port });
         this.wss.on('connection', this.onConnection);
     }
 
