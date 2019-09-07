@@ -47,7 +47,7 @@ export default class CallHandler {
         };
 
 
-        var wss_server_port = (port + 1 || 4443);
+        var wss_server_port = (port || 4443);
 
         this.ssl_server = https.createServer(options, app).listen(wss_server_port, () => {
             console.log("Start WSS Server: bind => wss://0.0.0.0:"+wss_server_port);
