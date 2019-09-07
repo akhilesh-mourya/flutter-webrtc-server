@@ -54,7 +54,7 @@ export default class CallHandler {
         });
 
 
-        this.wss = new ws.Server({ port: wss_server_port });
+        this.wss = new ws.Server({ server: this.ssl_server });
         this.wss.on('connection', this.onConnection);
     }
 
