@@ -46,7 +46,6 @@ export default class CallHandler {
             cert: fs.readFileSync('certs/cert.pem')
         };
 
-        console.log('port---', port)
 
         var wss_server_port = (port + 1 || 4443);
 
