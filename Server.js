@@ -32,7 +32,7 @@ export default class CallHandler {
 
          const _port = Number(process.env.PORT);
 
-        var ws_server_port = (port || 4442);
+        var ws_server_port = (_port || 4442);
         this.server = http.createServer(app).listen(ws_server_port, () => {
             console.log("Start WS Server: bind => ws://0.0.0.0:"+ws_server_port);
         });
@@ -41,10 +41,10 @@ export default class CallHandler {
         this.ws.on('connection', this.onConnection);
 
 
-        var options = {
-            key: fs.readFileSync('certs/key.pem'),
-            cert: fs.readFileSync('certs/cert.pem')
-        };
+        // var options = {
+        //     key: fs.readFileSync('certs/key.pem'),
+        //     cert: fs.readFileSync('certs/cert.pem')
+        // };
 
 
         // var wss_server_port = (_port || 4443);
