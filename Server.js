@@ -29,11 +29,14 @@ export default class CallHandler {
     }
 
     init() {
+        var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
+        ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
 
-         const _port = Number(process.env.PORT);
 
-        var ws_server_port = (_port || 4442);
-        this.server = http.createServer(app).listen(ws_server_port, () => {
+         //const _port = Number(process.env.PORT);
+
+        //var ws_server_port = (_port || 4442);
+        this.server = http.createServer(app).listen(port, ip, () => {
             console.log("Start WS Server: bind => ws://0.0.0.0:"+ws_server_port);
         });
 
