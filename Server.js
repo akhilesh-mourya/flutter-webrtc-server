@@ -32,13 +32,13 @@ export default class CallHandler {
 
          const _port = Number(process.env.PORT);
 
-        // var ws_server_port = (port || 4442);
-        // this.server = http.createServer(app).listen(ws_server_port, () => {
-        //     console.log("Start WS Server: bind => ws://0.0.0.0:"+ws_server_port);
-        // });
+        var ws_server_port = (port || 4442);
+        this.server = http.createServer(app).listen(ws_server_port, () => {
+            console.log("Start WS Server: bind => ws://0.0.0.0:"+ws_server_port);
+        });
 
-        // this.ws = new ws.Server({ server: this.server });
-        // this.ws.on('connection', this.onConnection);
+        this.ws = new ws.Server({ server: this.server });
+        this.ws.on('connection', this.onConnection);
 
 
         var options = {
@@ -47,15 +47,15 @@ export default class CallHandler {
         };
 
 
-        var wss_server_port = (_port || 4443);
+        // var wss_server_port = (_port || 4443);
 
-        this.ssl_server = https.createServer(options, app).listen(wss_server_port, () => {
-            console.log("Start WSS Server: bind => wss://0.0.0.0:"+wss_server_port);
-        });
+        // this.ssl_server = https.createServer(options, app).listen(wss_server_port, () => {
+        //     console.log("Start WSS Server: bind => wss://0.0.0.0:"+wss_server_port);
+        // });
 
 
-        this.wss = new ws.Server({ server: this.ssl_server, port:  _port + 1});
-        this.wss.on('connection', this.onConnection);
+        // this.wss = new ws.Server({ server: this.ssl_server, port:  _port + 1});
+        // this.wss.on('connection', this.onConnection);
     }
 
     updatePeers = () => {
