@@ -30,7 +30,7 @@ export default class CallHandler {
 
     init() {
 
-        // const port = Number(process.env.PORT);
+         const port = Number(process.env.PORT);
 
         // var ws_server_port = (port || 4442);
         // this.server = http.createServer(app).listen(ws_server_port, () => {
